@@ -1,0 +1,4 @@
+<p>Note list!</p>
+<div class="note-items-container" *ngIf="notes$ | async as notes">
+  <app-note-item [inNote]="note" *ngFor="let note of notes"></app-note-item>
+</div>

@@ -1,0 +1,11 @@
+<app-user-details
+  *ngIf="user$ | async as user; else elseBlock"
+  [inUser]="user"
+></app-user-details>
+<ng-template #elseBlock>
+  <div class="row">
+    <div class="col-4">
+      <app-user-menu></app-user-menu>
+    </div>
+  </div>
+</ng-template>

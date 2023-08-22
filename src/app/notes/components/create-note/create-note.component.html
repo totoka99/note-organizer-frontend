@@ -1,0 +1,10 @@
+<hr>
+<label>Note</label>
+<input type="text" class="form-control" (input)="onCreateNoteWithData($event)">
+<input type="text" class="form-control"
+[(ngModel)]="value">
+<p>{{value}}</p>
+<button mat-button type="button" (click)="onCreateNote()">Create</button>
+<div *ngIf="selectedNote$ | async as selectedNote">
+  <label>{{ selectedNote.description }}</label>
+</div>
