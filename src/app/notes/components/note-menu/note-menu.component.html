@@ -1,6 +1,17 @@
 <div class="col-6">
-    <hr>
-    <button class="btn btn-primary" routerLink="login">Login</button>
-    <button class="btn btn-primary" routerLink="registration">Registartion</button>
-    <hr>
+  <hr />
+  <button class="btn btn-primary" routerLink="create-note">
+    Create Note
+  </button>
+  <button
+    class="btn btn-primary"
+    routerLink="note-list"
+    (click)="onLoadNoteList()"
+  >
+    Note List
+  </button>
+  <hr />
+</div>
+<div class="div">
+  <router-outlet></router-outlet>
 </div>

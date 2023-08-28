@@ -11,6 +11,9 @@ import { SharedModule } from 'src/app/shared-module';
 import { UserMenuComponent } from './user-menu/user-menu.component';
 import { HeaderComponent } from './header/header.component';
 import { CookieService } from 'ngx-cookie-service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './jwt.interceptor';
+import { NoteMenuComponent } from '../notes/components/note-menu/note-menu.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,7 @@ import { CookieService } from 'ngx-cookie-service';
     RegistrationComponent,
     UserDetailsComponent,
     UserMenuComponent,
-    HeaderComponent
+    HeaderComponent    
   ],
   imports: [
     SharedModule,
@@ -32,6 +35,12 @@ import { CookieService } from 'ngx-cookie-service';
     UserMenuComponent,
     HeaderComponent
   ],
-  providers: []
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ]
 })
 export class ModuleUserModule {}

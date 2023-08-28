@@ -1,20 +1,23 @@
-import { createReducer, on } from '@ngrx/store';
+import { State, createReducer, on } from '@ngrx/store';
 import { SetSelectedNote } from '../interfaces';
 import { Note } from '../models';
-import { setSelectedNoteAction } from './note.actions';
+import {
+  loadNotesAction,
+  setNotesAction,
+  setSelectedNoteAction
+} from './note.actions';
+import { LoadedNotes } from '../interfaces/set-loaded-notes';
+import { state } from '@angular/animations';
+import { Observable } from 'rxjs/internal/Observable';
 
 export interface NoteState {
-  notes: Array<Note>;
+  notes: Note[] | null;
   selectedNote: Note | null;
 }
 
 export const initialState: NoteState = {
-  notes: [
-    new Note(1, 'Text', false),
-    { description: 'Ures' } as Note,
-    new Note(3, 'Text 3', false),
-  ],
-  selectedNote: null,
+  notes: null,
+  selectedNote: null
 };
 
 export const noteReducer = createReducer(
@@ -23,7 +26,14 @@ export const noteReducer = createReducer(
     setSelectedNoteAction,
     (state: NoteState, setSelectedNote: SetSelectedNote) => ({
       ...state,
-      selectedNote: setSelectedNote.selectedNote,
+      selectedNote: setSelectedNote.selectedNote
+    })
+  ),
+  on(
+    setNotesAction,
+    (state: NoteState, loaded: LoadedNotes) => ({
+      ...state,
+      notes: loaded.notes
     })
   )
 );

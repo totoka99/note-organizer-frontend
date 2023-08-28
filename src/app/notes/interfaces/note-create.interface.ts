@@ -1,5 +1,6 @@
 import { Note } from '../models';
 
 export interface NoteCreate {
-  newNote: Note;
+  name: string;
+  description: string;
 }

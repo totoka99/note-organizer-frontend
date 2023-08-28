@@ -1,4 +1,7 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import {
+  createFeatureSelector,
+  createSelector
+} from '@ngrx/store';
 import { UserState } from './user.reducer';
 import { userFeature } from '../user-feature.constant';
 
@@ -8,4 +11,8 @@ export const userFeatureSelector =
 export const userSelectorV2 = createSelector(
   userFeatureSelector,
   (user) => user.user
+);
+export const tokenSelector = createSelector(
+  userFeatureSelector,
+  (user) => user.token
 );

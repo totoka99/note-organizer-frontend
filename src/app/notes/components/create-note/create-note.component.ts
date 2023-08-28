@@ -9,22 +9,25 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'app-create-note',
   templateUrl: './create-note.component.html',
-  styleUrls: ['./create-note.component.scss'],
+  styleUrls: ['./create-note.component.scss']
 })
 export class CreateNoteComponent implements OnInit {
-  value = ''
+  title = '';
+  description = '';
   public readonly selectedNote$: Observable<Note | null>;
 
   constructor(private readonly noteFacade: NoteFacade) {
     this.selectedNote$ = this.noteFacade.selectedNote$;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   public onCreateNote(): void {
-    this.noteFacade.createNote(new Note(null, 'Hello', false));
-  }
-  public onCreateNoteWithData(event: Event) {
-    this.value = (<HTMLInputElement>event.target).value;
+    console.log(this.title);
+
+    this.noteFacade.createNote({
+      name: this.title,
+      description: this.description
+    });
   }
 }

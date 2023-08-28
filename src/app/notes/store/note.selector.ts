@@ -1,4 +1,7 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import {
+  createFeatureSelector,
+  createSelector
+} from '@ngrx/store';
 
 import { noteFeature } from '../constants';
 import { NoteState } from './note.reducer';

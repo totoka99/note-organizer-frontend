@@ -15,4 +15,14 @@ export const registerUserAction = createAction(
   ' [USER] Register user',
   props<RegisterUser>()
 );
-export const logoutUserAction = createAction(' [USER] logout User Action ');
+export const setJwtTokenAction = createAction(
+  '[USER] Set jwt token',
+  props<{ user: LoginUser; token: string }>()
+);
+export const getUserDetails = createAction(
+  '[USER] get user drteails',
+  props<LoginUser>()
+);
+export const logoutUserAction = createAction(
+  ' [USER] logout User Action '
+);

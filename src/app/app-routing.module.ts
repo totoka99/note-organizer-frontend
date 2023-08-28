@@ -5,15 +5,33 @@ import { NoteDetailsComponent } from './notes/components/note-details/note-detai
 import { NoteListComponent } from './notes/components/note-list/note-list.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
+import { NoteMenuComponent } from './notes/components/note-menu/note-menu.component';
 
 const routes: Routes = [
   {
+    path: '', // Empty path indicates the root URL
+    redirectTo: '/login', // Redirect to the '/home' route as the default
+    pathMatch: 'full' // This ensures a full URL match for the redirection
+  },
+  {
     path: 'notes',
     children: [
-      { path: 'create-note', component: CreateNoteComponent },
-      { path: 'note-list', component: NoteListComponent },
-      { path: ':id', component: NoteDetailsComponent },
-    ],
+      {
+        path: 'note-menu',
+        component: NoteMenuComponent,
+        children: [
+          {
+            path: 'create-note',
+            component: CreateNoteComponent
+          },
+          {
+            path: 'note-list',
+            component: NoteListComponent
+          },
+          { path: ':id', component: NoteDetailsComponent }
+        ]
+      }
+    ]
   },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent }
@@ -21,6 +39,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

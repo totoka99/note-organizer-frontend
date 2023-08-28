@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -7,28 +12,36 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-  genders = ["male", 'female'];
+  genders = ['male', 'female'];
   signupForm!: FormGroup;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
-      'userData': new FormGroup({
-        'username': new FormControl(null, Validators.required),
-        'email': new FormControl(null, [Validators.email, Validators.required]),
-        'password': new FormControl(null, [Validators.required, Validators.minLength(10)])
+      userData: new FormGroup({
+        username: new FormControl(
+          null,
+          Validators.required
+        ),
+        email: new FormControl(null, [
+          Validators.email,
+          Validators.required
+        ]),
+        password: new FormControl(null, [
+          Validators.required,
+          Validators.minLength(5)
+        ])
       }),
-
-      'gender': new FormControl('male'),
-      'hobbies': new FormArray([])
+      gender: new FormControl('male')
     });
-
   }
   onSubmit() {
     console.log(this.signupForm);
   }
   onAddHobby() {
-    (<FormArray>this.signupForm.get('hobbies')).push(new FormControl(null, Validators.required));
+    (<FormArray>this.signupForm.get('hobbies')).push(
+      new FormControl(null, Validators.required)
+    );
   }
 }

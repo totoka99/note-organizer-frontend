@@ -26,9 +26,22 @@ export class UserService {
   //   );
   // }
   public loginUser(loginUser: LoginUser): Observable<any> {
-    return this.httpclient.post<User>(
+    return this.httpclient.post(
       'http://localhost:8080/api/auth/sign-in',
-      loginUser
+      loginUser,
+      { responseType: 'text' }
+    );
+  }
+  public getUserDetails(
+    loginUser: LoginUser
+  ): Observable<User> {
+    const params = new HttpParams().set(
+      'username',
+      loginUser.username
+    );
+    return this.httpclient.get<User>(
+      'http://localhost:8080/api/user/name',
+      { params }
     );
   }
 }

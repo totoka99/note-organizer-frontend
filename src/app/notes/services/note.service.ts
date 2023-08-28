@@ -6,20 +6,21 @@ import { NoteCreate } from '../interfaces';
 import { Note } from '../models';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class NoteService {
   constructor(private readonly httpClient: HttpClient) {}
 
   public createNote(noteCreate: NoteCreate): Observable<Note> {
-    return this.httpClient
-      .post<any>('https://httpbin.org/post', noteCreate)
-      .pipe(
-        map((response: any) => {
-          console.log();
+    return this.httpClient.post<Note>(
+      'http://localhost:8080/api/user/1/note',
+      noteCreate
+    );
+  }
 
-          return JSON.parse(response.data).newNote;
-        })
-      );
+  public loadNotes(): Observable<Note[]> {
+    return this.httpClient.get<Note[]>(
+      'http://localhost:8080/api/note'
+    );
   }
 }

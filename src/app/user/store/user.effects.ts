@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import {
+  Actions,
+  createEffect,
+  ofType
+} from '@ngrx/effects';
 import { UserService } from '../services/user.service';
 import { LoginUser } from '../interfaces/loginUser';
 import { catchError, map, of, switchMap } from 'rxjs';
 import {
+  getUserDetails,
   loginUserAction,
-  logoutUserAction,
+  setJwtTokenAction,
   setUserAction
 } from './user.actions';
-import { setSelectedNoteAction } from 'src/app/notes/store/note.actions';
 import { User } from '../user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -26,16 +30,39 @@ export class UserEffects {
       ofType(loginUserAction),
       switchMap((action: LoginUser) =>
         this.userService.loginUser(action).pipe(
-          map((user: User) => {
-            console.log(user);
-            this.router.navigate(['/notes/note-list']);
-            return setUserAction(new User(user.username, user.email));
+          map((token: string) => {
+            this.router.navigate(['/notes/note-menu']);
+            return setJwtTokenAction({
+              user: action,
+              token: token
+            });
           }),
           catchError((error: HttpErrorResponse) => {
             console.log(error);
-            return of(setUserAction(new User('name', 'email')));
+            this.router.navigate([
+              '/note-menu/notes/note-menu'
+            ]);
+            return of(
+              setUserAction(new User(1, 'name', 'email'))
+            );
           })
         )
+      )
+    )
+  );
+  public readonly retrieveUser = createEffect(() =>
+    this.actions$.pipe(
+      ofType(setJwtTokenAction),
+      switchMap((action) => of(getUserDetails(action.user)))
+    )
+  );
+  public readonly getUserDetails = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getUserDetails),
+      switchMap((action: LoginUser) =>
+        this.userService
+          .getUserDetails(action)
+          .pipe(map((user: User) => setUserAction(user)))
       )
     )
   );
