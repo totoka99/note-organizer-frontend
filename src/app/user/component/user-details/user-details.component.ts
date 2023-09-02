@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from '../user.interface';
+import { User } from '../../user.interface';
 import { Observable } from 'rxjs/internal/Observable';
 import { Store } from '@ngrx/store';
-import { logoutUserAction } from '../store/user.actions';
+import { logoutUserAction } from '../../store/user.actions';
 
 @Component({
   selector: 'app-user-details',

@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateNoteComponent } from './notes/components/create-note/create-note.component';
 import { NoteDetailsComponent } from './notes/components/note-details/note-details.component';
 import { NoteListComponent } from './notes/components/note-list/note-list.component';
-import { LoginComponent } from './user/login/login.component';
-import { RegistrationComponent } from './user/registration/registration.component';
+import { LoginComponent } from './user/component/login/login.component';
+import { RegistrationComponent } from './user/component/registration/registration.component';
 import { NoteMenuComponent } from './notes/components/note-menu/note-menu.component';
 
 const routes: Routes = [

@@ -30,6 +30,7 @@ export const userReducer = createReducer(
   })),
   on(logoutUserAction, (state: UserState) => ({
     ...state,
-    user: null
+    user: null,
+    token: null
   }))
 );

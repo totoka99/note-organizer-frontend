@@ -23,8 +23,6 @@ export class CreateNoteComponent implements OnInit {
   ngOnInit(): void {}
 
   public onCreateNote(): void {
-    console.log(this.title);
-
     this.noteFacade.createNote({
       name: this.title,
       description: this.description

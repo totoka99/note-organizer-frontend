@@ -14,8 +14,6 @@ export class NoteMenuComponent implements OnInit {
 
   ngOnInit(): void {}
   public onLoadNoteList() {
-    console.log('yes');
-
     this.store.dispatch(loadNotesAction());
   }
 }

@@ -9,7 +9,7 @@ import {
 import { Observable, map } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Store } from '@ngrx/store';
-import { tokenSelector } from './store/user.selector';
+import { tokenSelector } from 'src/app/user/store/user.selector';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {

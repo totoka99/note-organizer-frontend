@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { NoteCreate } from '../interfaces';
+import { map, Observable, tap } from 'rxjs';
+import { DeleteNote, NoteCreate } from '../interfaces';
 
 import { Note } from '../models';
 
@@ -22,5 +22,13 @@ export class NoteService {
     return this.httpClient.get<Note[]>(
       'http://localhost:8080/api/note'
     );
+  }
+  public deleteNote(deleteNote: DeleteNote) {
+    this.httpClient
+      .delete(
+        'http://localhost:8080/api/note/' +
+          deleteNote.selectedNote?.id
+      )
+      .subscribe((data) => console.log('success'));
   }
 }

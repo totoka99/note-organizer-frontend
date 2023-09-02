@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { User } from '../user.interface';
-import { userSelectorV2 } from '../store/user.selector';
+import { User } from '../../user.interface';
+import { userSelectorV2 } from '../../store/user.selector';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Component({

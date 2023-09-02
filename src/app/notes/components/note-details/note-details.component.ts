@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Note } from '../../models/note.model';
+import { Store } from '@ngrx/store';
+import { selectedNoteSelector } from '../../store/note.selector';
 
 @Component({
   selector: 'app-note-details',
@@ -6,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./note-details.component.scss']
 })
 export class NoteDetailsComponent implements OnInit {
+  public inNote!: Note | null;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private store: Store) {
+    this.store
+      .select(selectedNoteSelector)
+      .subscribe((note) => (this.inNote = note));
   }
 
+  ngOnInit(): void {}
 }

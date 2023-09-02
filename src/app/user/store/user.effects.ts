@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  Actions,
-  createEffect,
-  ofType
-} from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UserService } from '../services/user.service';
 import { LoginUser } from '../interfaces/loginUser';
 import { catchError, map, of, switchMap } from 'rxjs';
@@ -39,9 +35,6 @@ export class UserEffects {
           }),
           catchError((error: HttpErrorResponse) => {
             console.log(error);
-            this.router.navigate([
-              '/note-menu/notes/note-menu'
-            ]);
             return of(
               setUserAction(new User(1, 'name', 'email'))
             );

@@ -1,5 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { NoteCreate, SetSelectedNote } from '../interfaces';
+import {
+  DeleteNote,
+  NoteCreate,
+  SetSelectedNote
+} from '../interfaces';
 import { LoadedNotes } from '../interfaces/set-loaded-notes';
 
 export const createNoteAction = createAction(
@@ -21,7 +25,7 @@ export const setNotesAction = createAction(
   '[NOTE] Set loaded notes',
   props<LoadedNotes>()
 );
-export const deleteNoteAction = createAction(
+export const deleteSelectedNoteAction = createAction(
   '[NOTE] Delte note',
-  props<any>()
+  props<DeleteNote>()
 );

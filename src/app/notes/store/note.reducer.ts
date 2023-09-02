@@ -1,7 +1,8 @@
 import { State, createReducer, on } from '@ngrx/store';
-import { SetSelectedNote } from '../interfaces';
+import { DeleteNote, SetSelectedNote } from '../interfaces';
 import { Note } from '../models';
 import {
+  deleteSelectedNoteAction,
   loadNotesAction,
   setNotesAction,
   setSelectedNoteAction
@@ -36,4 +37,10 @@ export const noteReducer = createReducer(
       notes: loaded.notes
     })
   )
+  // on(deleteSelectedNoteAction,
+  //   (state: NoteState, delteNote:DeleteNote)=>({
+  //     ...state,
+  //     notes: notes.pipe()
+  //   })
+  //   )
 );

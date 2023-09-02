@@ -2,32 +2,40 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
-import { catchError, switchMap, map } from 'rxjs/operators';
+import {
+  catchError,
+  switchMap,
+  map,
+  exhaustMap
+} from 'rxjs/operators';
 
 import { NoteCreate } from '../interfaces';
 import { Note } from '../models';
 import { NoteService } from '../services';
 import {
   createNoteAction,
+  deleteSelectedNoteAction,
   loadNotesAction,
   setNotesAction,
   setSelectedNoteAction
 } from './note.actions';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class NoteEffects {
   constructor(
     private readonly actions$: Actions,
-    private readonly noteService: NoteService
+    private readonly noteService: NoteService,
+    private readonly router: Router
   ) {}
 
-  public readonly createNote = createEffect(() =>
+  public readonly createNoteEfect = createEffect(() =>
     this.actions$.pipe(
       ofType(createNoteAction.type),
       switchMap((action: NoteCreate) => {
-        console.log(action);
         return this.noteService.createNote(action).pipe(
           map((createdNote: Note) => {
+            this.router.navigate(['/notes/' + createdNote.id]);
             return setSelectedNoteAction({
               selectedNote: createdNote
             });
@@ -36,14 +44,22 @@ export class NoteEffects {
       })
     )
   );
-  public readonly LoadNote = createEffect(() =>
+  public readonly LoadNoteEffect = createEffect(() =>
     this.actions$.pipe(
       ofType(loadNotesAction),
       switchMap((action) => {
-        console.log('yes');
         return this.noteService
           .loadNotes()
           .pipe(map((data) => setNotesAction({ notes: data })));
+      })
+    )
+  );
+  public readonly deleteNoteEffect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deleteSelectedNoteAction),
+      switchMap((action) => {
+        this.noteService.deleteNote(action);
+        return of(loadNotesAction());
       })
     )
   );
