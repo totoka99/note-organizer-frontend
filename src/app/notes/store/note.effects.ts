@@ -35,7 +35,9 @@ export class NoteEffects {
       switchMap((action: NoteCreate) => {
         return this.noteService.createNote(action).pipe(
           map((createdNote: Note) => {
-            this.router.navigate(['/notes/' + createdNote.id]);
+            this.router.navigate([
+              '/notes/note-menu/' + createdNote.id
+            ]);
             return setSelectedNoteAction({
               selectedNote: createdNote
             });
@@ -58,8 +60,9 @@ export class NoteEffects {
     this.actions$.pipe(
       ofType(deleteSelectedNoteAction),
       switchMap((action) => {
-        this.noteService.deleteNote(action);
-        return of(loadNotesAction());
+        return this.noteService
+          .deleteNote(action)
+          .pipe(map(() => loadNotesAction()));
       })
     )
   );
