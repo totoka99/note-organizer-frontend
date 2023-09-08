@@ -24,11 +24,9 @@ export class NoteService {
     );
   }
   public deleteNote(deleteNote: DeleteNote) {
-    this.httpClient
-      .delete(
-        'http://localhost:8080/api/note/' +
-          deleteNote.selectedNote?.id
-      )
-      .subscribe((data) => console.log('success'));
+    return this.httpClient.delete(
+      'http://localhost:8080/api/note/' +
+        deleteNote.selectedNote?.id
+    );
   }
 }
