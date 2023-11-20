@@ -1,11 +1,11 @@
-<h1>{{ inUser.username }}</h1>
-<h1>{{ inUser.email }}</h1>
-<h1>{{ inUser.id }}</h1>
-<button
-  routerLink="login"
-  class="btn btn-primary"
-  type="submit"
-  (click)="onClick()"
->
-  Logout
-</button>
+<div>
+  <h1>{{ inUser.email }}</h1>
+  <button
+    mat-stroked-button
+    routerLink="login"
+    type="submit"
+    (click)="onClick()"
+  >
+    Logout
+  </button>
+</div>

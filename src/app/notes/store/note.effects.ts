@@ -15,9 +15,10 @@ import { NoteService } from '../services';
 import {
   createNoteAction,
   deleteSelectedNoteAction,
-  loadNotesAction,
+  getNotesAction,
   setNotesAction,
-  setSelectedNoteAction
+  setSelectedNoteAction,
+  updateNoteAction
 } from './note.actions';
 import { Router } from '@angular/router';
 
@@ -48,7 +49,7 @@ export class NoteEffects {
   );
   public readonly LoadNoteEffect = createEffect(() =>
     this.actions$.pipe(
-      ofType(loadNotesAction),
+      ofType(getNotesAction),
       switchMap((action) => {
         return this.noteService
           .loadNotes()
@@ -61,9 +62,33 @@ export class NoteEffects {
       ofType(deleteSelectedNoteAction),
       switchMap((action) => {
         return this.noteService
-          .deleteNote(action)
-          .pipe(map(() => loadNotesAction()));
+          .deleteNote(action.selectedNote!)
+          .pipe(map(() => getNotesAction()));
       })
     )
   );
+  public readonly updateNoteEffect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateNoteAction),
+      switchMap((action) => {
+        return this.noteService
+          .updateNote(action.noteDetails!)
+          .pipe(
+            map((note) => {
+              this.router.navigate([
+                '/notes/note-menu/note-list'
+              ]);
+              return getNotesAction();
+            })
+          );
+      })
+    )
+  );
+  // public readonly updateNoteEffect = createEffect(()=>
+  // ofType(updateNoteAction),
+  // switchMap((action)=>
+  // return this.noteService.updateNote(action.)
+
+  // )
+  // )
 }

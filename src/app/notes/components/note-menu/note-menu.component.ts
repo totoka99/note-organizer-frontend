@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
-import { loadNotesAction } from '../../store/note.actions';
+import { getNotesAction } from '../../store/note.actions';
 
 @Component({
   selector: 'app-note-menu',
@@ -14,6 +14,6 @@ export class NoteMenuComponent implements OnInit {
 
   ngOnInit(): void {}
   public onLoadNoteList() {
-    this.store.dispatch(loadNotesAction());
+    this.store.dispatch(getNotesAction());
   }
 }

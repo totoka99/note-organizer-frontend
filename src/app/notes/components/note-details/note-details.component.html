@@ -1,18 +1,35 @@
-<div class="col-2">
-  <div class="div">
-    <label> id: {{ inNote?.id }} </label>
+<div class="container">
+  <div class="row">
+    <label> id: {{ detailsNote.id }} </label>
   </div>
-  <div class="div">
-    <label> Title: {{ inNote?.name }} </label>
-    <input type="text" class="form-control" />
+  <div class="row">
+    <label> Edit Title:</label>
+    <input
+      type="text"
+      [(ngModel)]="detailsNote.name"
+      class="form-control"
+    />
   </div>
-  <div class="div">
-    <label> Desciption: {{ inNote?.description }} </label>
-    <input type="text" class="form-control" />
+  <div class="row">
+    <label> Edit Desciption:</label>
+    <input
+      type="text"
+      [(ngModel)]="detailsNote.description"
+      class="form-control"
+    />
   </div>
-  <div class="div">
-    <label> is Done? </label>
-    <input type="checkbox" [checked]="inNote?.isChecked" />
-    {{ inNote?.isChecked }}
+  <div class="row">
+    <label> is it Done? </label>
+    <input
+      type="checkbox"
+      (change)="onCheckboxChange()"
+      [(ngModel)]="detailsNote.isChecked"
+    />
+    {{ detailsNote.isChecked }}
+  </div>
+  <div class="row">
+    <button class="btn btn-primary" (click)="onUpdate()">
+      Update
+    </button>
   </div>
 </div>

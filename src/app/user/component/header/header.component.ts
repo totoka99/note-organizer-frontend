@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/internal/Observable';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  showFiller = false;
   user$: Observable<User | null>;
   constructor(private store: Store) {
     this.user$ = store.select(userSelectorV2);

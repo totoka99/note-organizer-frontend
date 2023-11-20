@@ -10,38 +10,32 @@ import { LoginUser } from '../interfaces/loginUser';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { User } from '../user.interface';
+import { RegisterUser } from '../interfaces/registerUser';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private url: string = environment.backendUrl;
   constructor(private readonly httpclient: HttpClient) {}
 
-  // public loginUser(loginUser: LoginUser) {
-  //   return this.httpclient.post<any>('http://localhost:8080/api/auth/sign-in', loginUser).pipe(
-  //     map((response: any) => {
-  //       console.log();
-  //       return response;
-  //     })
-  //   );
-  // }
   public loginUser(loginUser: LoginUser): Observable<any> {
     return this.httpclient.post(
-      'http://localhost:8080/api/auth/sign-in',
+      this.url + 'auth/sign-in',
       loginUser,
       { responseType: 'text' }
     );
   }
-  public getUserDetails(
-    loginUser: LoginUser
-  ): Observable<User> {
-    const params = new HttpParams().set(
-      'username',
-      loginUser.username
+  public registerUser(registerUser: RegisterUser) {
+    return this.httpclient.post(
+      this.url + 'auth/registration',
+      registerUser
     );
+  }
+  public getUserDetails() {
     return this.httpclient.get<User>(
-      'http://localhost:8080/api/user/name',
-      { params }
+      this.url + 'user/user-details'
     );
   }
 }

@@ -24,7 +24,10 @@ export class JwtInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     // const token = this.cokie.get('jwt-auth');
 
-    if (request.url.includes('api/auth/sign-in')) {
+    if (
+      request.url.includes('auth/registration') ||
+      request.url.includes('api/auth/sign-in')
+    ) {
       return next.handle(request);
     }
     let authToken;

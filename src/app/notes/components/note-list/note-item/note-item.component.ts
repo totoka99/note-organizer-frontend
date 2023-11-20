@@ -32,4 +32,7 @@ export class NoteItemComponent implements OnInit {
       deleteSelectedNoteAction({ selectedNote: this.inNote })
     );
   }
+  get checked() {
+    return this.inNote?.isChecked ? 'checked' : 'unchecked';
+  }
 }

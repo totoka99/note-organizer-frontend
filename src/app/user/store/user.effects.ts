@@ -6,12 +6,16 @@ import { catchError, map, of, switchMap } from 'rxjs';
 import {
   getUserDetails,
   loginUserAction,
+  loginUserErrorAction,
+  registerUserAction,
+  registrationSuccesfulAcction,
   setJwtTokenAction,
   setUserAction
 } from './user.actions';
 import { User } from '../user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { RegisterUser } from '../interfaces/registerUser';
 
 @Injectable()
 export class UserEffects {
@@ -29,15 +33,15 @@ export class UserEffects {
           map((token: string) => {
             this.router.navigate(['/notes/note-menu']);
             return setJwtTokenAction({
-              user: action,
               token: token
             });
           }),
           catchError((error: HttpErrorResponse) => {
-            console.log(error);
-            return of(
-              setUserAction(new User(1, 'name', 'email'))
+            window.alert(
+              error.status +
+                'cant login wrong username or password'
             );
+            return of(loginUserErrorAction());
           })
         )
       )
@@ -46,15 +50,32 @@ export class UserEffects {
   public readonly retrieveUser = createEffect(() =>
     this.actions$.pipe(
       ofType(setJwtTokenAction),
-      switchMap((action) => of(getUserDetails(action.user)))
+      switchMap(() => of(getUserDetails()))
+    )
+  );
+  public readonly registerUser = createEffect(() =>
+    this.actions$.pipe(
+      ofType(registerUserAction),
+      switchMap((action: RegisterUser) =>
+        this.userService.registerUser(action).pipe(
+          map(() => {
+            this.router.navigate(['/login']);
+            return registrationSuccesfulAcction();
+          }),
+          catchError((error: HttpErrorResponse) => {
+            window.alert(error.error.title);
+            return of(loginUserErrorAction());
+          })
+        )
+      )
     )
   );
   public readonly getUserDetails = createEffect(() =>
     this.actions$.pipe(
       ofType(getUserDetails),
-      switchMap((action: LoginUser) =>
+      switchMap(() =>
         this.userService
-          .getUserDetails(action)
+          .getUserDetails()
           .pipe(map((user: User) => setUserAction(user)))
       )
     )

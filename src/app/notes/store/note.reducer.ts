@@ -3,7 +3,7 @@ import { DeleteNote, SetSelectedNote } from '../interfaces';
 import { Note } from '../models';
 import {
   deleteSelectedNoteAction,
-  loadNotesAction,
+  getNotesAction,
   setNotesAction,
   setSelectedNoteAction
 } from './note.actions';

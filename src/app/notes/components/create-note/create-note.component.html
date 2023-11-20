@@ -1,10 +1,16 @@
 <hr />
-<label>Note</label>
+<label>Create Note</label>
 
-<input type="text" class="form-control" [(ngModel)]="title" />
 <input
   type="text"
   class="form-control"
+  placeholder="title"
+  [(ngModel)]="title"
+/>
+<input
+  type="text"
+  class="form-control"
+  placeholder="description"
   [(ngModel)]="description"
 />
 <button

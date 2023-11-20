@@ -12,6 +12,13 @@ import { UserMenuComponent } from './component/user-menu/user-menu.component';
 import { HeaderComponent } from './component/header/header.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from '../core/auth/jwt.interceptor';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { NgIf } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -24,14 +31,23 @@ import { JwtInterceptor } from '../core/auth/jwt.interceptor';
   imports: [
     SharedModule,
     StoreModule.forFeature(userFeature, userReducer),
-    EffectsModule.forFeature([UserEffects])
+    EffectsModule.forFeature([UserEffects]),
+    MatSidenavModule,
+    NgIf,
+    MatButtonModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     LoginComponent,
     RegistrationComponent,
     UserDetailsComponent,
     UserMenuComponent,
-    HeaderComponent
+    HeaderComponent,
+    MatSidenavModule,
+    NgIf,
+    MatButtonModule
   ],
   providers: [
     {

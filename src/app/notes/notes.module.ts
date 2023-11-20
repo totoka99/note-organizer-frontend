@@ -13,8 +13,18 @@ import { NoteMenuComponent } from './components/note-menu/note-menu.component';
 import { SharedModule } from '../shared-module';
 
 @NgModule({
-  declarations: [CreateNoteComponent, NoteListComponent, NoteDetailsComponent, NoteItemComponent, NoteMenuComponent],
-  imports: [SharedModule, StoreModule.forFeature(noteFeature, noteReducer), EffectsModule.forFeature([NoteEffects])],
+  declarations: [
+    CreateNoteComponent,
+    NoteListComponent,
+    NoteDetailsComponent,
+    NoteItemComponent,
+    NoteMenuComponent
+  ],
+  imports: [
+    SharedModule,
+    StoreModule.forFeature(noteFeature, noteReducer),
+    EffectsModule.forFeature([NoteEffects])
+  ],
   exports: [NoteMenuComponent],
   providers: []
 })

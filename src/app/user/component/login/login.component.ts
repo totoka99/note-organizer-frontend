@@ -4,8 +4,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { UserService } from '../../services/user.service';
-import { State, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { loginUserAction } from '../../store/user.actions';
 
 @Component({
@@ -16,10 +15,7 @@ import { loginUserAction } from '../../store/user.actions';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(
-    private userService: UserService,
-    private store: Store
-  ) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({

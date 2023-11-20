@@ -1,15 +1,12 @@
-<div class="row">
-  <div class="col-2">
-    Note: {{ inNote?.id }} | {{ inNote?.description }} |
-    {{ inNote?.name }} |
-    {{ inNote?.isChecked }}
-  </div>
-  <div class="col-3">
-    <button class="btn btn-primary" (click)="onEdit()">
-      Edit
-    </button>
-    <button class="btn btn-primary" (click)="onDelete()">
-      Delete
-    </button>
-  </div>
+<div class="col-6">
+  <hr />
+  Note: {{ inNote?.id }} | {{ inNote?.description }} |
+  {{ inNote?.name }} | {{ checked }}
+
+  <button class="btn btn-primary" (click)="onEdit()">
+    Edit
+  </button>
+  <button class="btn btn-primary" (click)="onDelete()">
+    Delete
+  </button>
 </div>
