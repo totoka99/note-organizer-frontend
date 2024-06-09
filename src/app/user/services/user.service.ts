@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { User } from '../user.interface';
 import { RegisterUser } from '../interfaces/registerUser';
 import { environment } from 'src/environments/environment';
+import { PasswordRequest } from '../interfaces/passwordRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,12 @@ export class UserService {
   public getUserDetails() {
     return this.httpclient.get<User>(
       this.url + 'user/user-details'
+    );
+  }
+  public requestnewPassword(passwordRequest: PasswordRequest) {
+    return this.httpclient.post(
+      this.url + 'auth/password-request',
+      passwordRequest
     );
   }
 }

@@ -35,7 +35,6 @@ export class NoteDetailsComponent implements OnInit {
         noteDetails: this.detailsNote
       })
     );
-    console.log(this.detailsNote);
   }
   onCheckboxChange() {
     console.log(this.detailsNote.isChecked);

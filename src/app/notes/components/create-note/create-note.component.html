@@ -1,22 +1,26 @@
-<hr />
-<label>Create Note</label>
+<div class="row">
+  <div>
+    <hr />
+    <label>Create Note</label>
 
-<input
-  type="text"
-  class="form-control"
-  placeholder="title"
-  [(ngModel)]="title"
-/>
-<input
-  type="text"
-  class="form-control"
-  placeholder="description"
-  [(ngModel)]="description"
-/>
-<button
-  class="btn btn-primary"
-  type="button"
-  (click)="onCreateNote()"
->
-  Create
-</button>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="title"
+      [(ngModel)]="title"
+    />
+    <input
+      type="text"
+      class="form-control"
+      placeholder="description"
+      [(ngModel)]="description"
+    />
+    <button
+      class="btn btn-primary"
+      type="button"
+      (click)="onCreateNote()"
+    >
+      Create
+    </button>
+  </div>
+</div>

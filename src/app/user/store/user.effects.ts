@@ -2,13 +2,24 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UserService } from '../services/user.service';
 import { LoginUser } from '../interfaces/loginUser';
-import { catchError, map, of, switchMap } from 'rxjs';
+import {
+  catchError,
+  exhaustMap,
+  map,
+  of,
+  switchMap,
+  tap
+} from 'rxjs';
 import {
   getUserDetails,
   loginUserAction,
   loginUserErrorAction,
+  logoutUserAction,
   registerUserAction,
-  registrationSuccesfulAcction,
+  registrationSuccessfulAcction,
+  requestNewPassword,
+  requestNewPasswordSuccessful,
+  requestNewPasswordUnsuccessful,
   setJwtTokenAction,
   setUserAction
 } from './user.actions';
@@ -16,13 +27,16 @@ import { User } from '../user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { RegisterUser } from '../interfaces/registerUser';
+import { NotificationsService } from 'src/app/core/notifications/notifications.service';
+import { PasswordRequest } from '../interfaces/passwordRequest';
 
 @Injectable()
 export class UserEffects {
   constructor(
     private readonly router: Router,
     private readonly actions$: Actions,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly notificationService: NotificationsService
   ) {}
 
   public readonly loginUser = createEffect(() =>
@@ -32,14 +46,18 @@ export class UserEffects {
         this.userService.loginUser(action).pipe(
           map((token: string) => {
             this.router.navigate(['/notes/note-menu']);
+            this.notificationService.showNotification(
+              'Login successful '
+            );
             return setJwtTokenAction({
               token: token
             });
           }),
           catchError((error: HttpErrorResponse) => {
-            window.alert(
-              error.status +
-                'cant login wrong username or password'
+            this.notificationService.showNotification(
+              'Wrong username or password',
+              'Close',
+              2000
             );
             return of(loginUserErrorAction());
           })
@@ -53,6 +71,18 @@ export class UserEffects {
       switchMap(() => of(getUserDetails()))
     )
   );
+  public readonly logoutUser = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(logoutUserAction),
+        tap(() => {
+          this.notificationService.showNotification(
+            'Logout successful'
+          );
+        })
+      ),
+    { dispatch: false }
+  );
   public readonly registerUser = createEffect(() =>
     this.actions$.pipe(
       ofType(registerUserAction),
@@ -60,10 +90,17 @@ export class UserEffects {
         this.userService.registerUser(action).pipe(
           map(() => {
             this.router.navigate(['/login']);
-            return registrationSuccesfulAcction();
+            this.notificationService.showNotification(
+              'Account created'
+            );
+            return registrationSuccessfulAcction;
           }),
           catchError((error: HttpErrorResponse) => {
-            window.alert(error.error.title);
+            this.notificationService.showNotification(
+              'error: ' + error.error.detail,
+              'Close',
+              3000
+            );
             return of(loginUserErrorAction());
           })
         )
@@ -77,6 +114,29 @@ export class UserEffects {
         this.userService
           .getUserDetails()
           .pipe(map((user: User) => setUserAction(user)))
+      )
+    )
+  );
+  public readonly requestNewPassword = createEffect(() =>
+    this.actions$.pipe(
+      ofType(requestNewPassword),
+      switchMap((passwordRequest: PasswordRequest) =>
+        this.userService
+          .requestnewPassword(passwordRequest)
+          .pipe(
+            map((response) => {
+              this.notificationService.showNotification(
+                'new Password requested'
+              );
+              return requestNewPasswordSuccessful();
+            }),
+            catchError((error) => {
+              this.notificationService.showNotification(
+                'request failed'
+              );
+              return of(requestNewPasswordUnsuccessful());
+            })
+          )
       )
     )
   );

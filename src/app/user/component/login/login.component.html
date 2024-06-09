@@ -1,31 +1,38 @@
-<div class="content-container flex-center-row">
-  <div class="row">
-    <div class="col-xs-5 col-sm-5 col-md-5">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div formGroupName="userData">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="text"
-              id="email"
-              formControlName="email"
-              class="form-control"
-            />
-          </div>
-        </div>
-        <div formGroupName="userData" class="form-group">
-          <label for="password"> Password</label>
+<div class="row">
+  <div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div formGroupName="userData">
+        <div class="form-group">
+          <label for="email">Email</label>
           <input
-            type="text"
-            id="password"
-            formControlName="password"
+            type="email"
+            id="email"
+            formControlName="email"
             class="form-control"
           />
-          <button class="btn btn-primary" type="submit">
-            Submit
-          </button>
         </div>
-      </form>
-    </div>
+      </div>
+      <div formGroupName="userData" class="form-group">
+        <label for="password"> Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+        />
+        <div>
+          <span>Forgott your password??</span
+          ><span
+            class="click-here"
+            routerLink="/forgotten-password"
+          >
+            Click here</span
+          >
+        </div>
+        <button class="btn btn-primary" type="submit">
+          Submit
+        </button>
+      </div>
+    </form>
   </div>
 </div>

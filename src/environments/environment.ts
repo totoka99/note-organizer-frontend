@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   backendUrl:
-    'https://benotes-api-dev-cw6fasomoa-nw.a.run.app/api/'
+    'http://localhost:8080/api/'
 };
 
 /*

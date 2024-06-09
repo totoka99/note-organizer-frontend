@@ -1,9 +1,20 @@
 <div
-  class="note-items-container col-6"
+  class="note-items-container"
   *ngIf="notes$ | async as notes"
 >
-  <app-note-item
-    [inNote]="note"
-    *ngFor="let note of notes"
-  ></app-note-item>
+  <div class="row">
+    <div class="col-4 text-center col-md-4 col-lg-4">
+      Note Id
+    </div>
+    <div class="col-4 text-center col-md-4 col-lg-4">Title</div>
+    <div class="col-4 text-center col-md-4 col-lg-4">
+      Description
+    </div>
+  </div>
+  <div class="row">
+    <app-note-item
+      [inNote]="note"
+      *ngFor="let note of notes"
+    ></app-note-item>
+  </div>
 </div>

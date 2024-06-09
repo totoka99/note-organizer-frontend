@@ -9,10 +9,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotesModule } from './notes/notes.module';
 import { ModuleUserModule } from './user/module-user.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    MatSnackBarModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

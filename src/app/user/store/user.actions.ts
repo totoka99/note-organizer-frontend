@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { LoginUser } from '../interfaces/loginUser';
 import { RegisterUser } from '../interfaces/registerUser';
 import { User } from '../user';
+import { PasswordRequest } from '../interfaces/passwordRequest';
 
 export const loginUserAction = createAction(
   '[USER] Login user',
@@ -28,6 +29,16 @@ export const getUserDetails = createAction(
 export const logoutUserAction = createAction(
   ' [USER] logout User Action '
 );
-export const registrationSuccesfulAcction = createAction(
+export const registrationSuccessfulAcction = createAction(
   '[USER] Registration successful'
+);
+export const requestNewPassword = createAction(
+  '[USER] New password requested',
+  props<PasswordRequest>()
+);
+export const requestNewPasswordSuccessful = createAction(
+  '[USER] New password request successful'
+);
+export const requestNewPasswordUnsuccessful = createAction(
+  '[USER] New password request unsuccessful'
 );

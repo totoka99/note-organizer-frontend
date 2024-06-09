@@ -1,14 +1,12 @@
-<mat-toolbar>
-  <span class="example-spacer">
+<div class="row">
+  <div>
     <app-user-details
       *ngIf="user$ | async as user; else elseBlock"
       [inUser]="user"
     ></app-user-details>
-  </span>
-</mat-toolbar>
 
-<div class="col-6 container">
-  <ng-template #elseBlock>
-    <app-user-menu></app-user-menu>
-  </ng-template>
+    <ng-template #elseBlock>
+      <app-user-menu></app-user-menu>
+    </ng-template>
+  </div>
 </div>

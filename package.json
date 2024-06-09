@@ -24,6 +24,7 @@
     "@ngrx/effects": "^14.3.3",
     "@ngrx/store": "^14.3.3",
     "bootstrap": "^3.4.1",
+    "firebase": "^10.11.0",
     "ngx-cookie-service": "^14.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

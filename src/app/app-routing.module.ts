@@ -6,6 +6,8 @@ import { NoteListComponent } from './notes/components/note-list/note-list.compon
 import { LoginComponent } from './user/component/login/login.component';
 import { RegistrationComponent } from './user/component/registration/registration.component';
 import { NoteMenuComponent } from './notes/components/note-menu/note-menu.component';
+import { ForgottenPasswordComponent } from './user/component/forgotten-password/forgotten-password.component';
+import { ResetPasswordComponent } from './user/component/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -32,6 +34,14 @@ const routes: Routes = [
         ]
       }
     ]
+  },
+  {
+    path: 'forgotten-password',
+    component: ForgottenPasswordComponent
+  },
+  {
+    path: 'reset-password/:pwResetCode',
+    component: ResetPasswordComponent
   },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent }

@@ -16,25 +16,23 @@ export class NoteService {
 
   public createNote(noteCreate: NoteCreate): Observable<Note> {
     return this.httpClient.post<Note>(
-      this.url + '/note',
+      this.url + 'note',
       noteCreate
     );
   }
   public updateNote(noteDetails: Note) {
-    console.log(noteDetails);
-
     return this.httpClient.put<Note>(
-      this.url + '/note',
+      this.url + 'note',
       noteDetails
     );
   }
 
   public loadNotes(): Observable<Note[]> {
-    return this.httpClient.get<Note[]>(this.url + '/note');
+    return this.httpClient.get<Note[]>(this.url + 'note');
   }
   public deleteNote(selectedNote: Note) {
     return this.httpClient.delete(
-      this.url + '/note/' + selectedNote?.id
+      this.url + 'note/' + selectedNote?.id
     );
   }
 }

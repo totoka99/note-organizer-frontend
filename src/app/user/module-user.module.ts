@@ -15,10 +15,11 @@ import { JwtInterceptor } from '../core/auth/jwt.interceptor';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { NgIf } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ForgottenPasswordComponent } from './component/forgotten-password/forgotten-password.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,10 @@ import { MatInputModule } from '@angular/material/input';
     RegistrationComponent,
     UserDetailsComponent,
     UserMenuComponent,
-    HeaderComponent
+    HeaderComponent,
+    ForgottenPasswordComponent,
+    ResetPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     SharedModule,
@@ -41,10 +45,12 @@ import { MatInputModule } from '@angular/material/input';
   ],
   exports: [
     LoginComponent,
+    ForgottenPasswordComponent,
     RegistrationComponent,
     UserDetailsComponent,
     UserMenuComponent,
     HeaderComponent,
+    ResetPasswordComponent,
     MatSidenavModule,
     NgIf,
     MatButtonModule

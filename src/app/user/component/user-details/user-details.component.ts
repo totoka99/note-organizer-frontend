@@ -15,7 +15,7 @@ export class UserDetailsComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {}
-  onClick() {
+  onClickLogout() {
     this.store.dispatch(logoutUserAction());
   }
 }

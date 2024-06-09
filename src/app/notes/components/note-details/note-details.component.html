@@ -1,35 +1,33 @@
-<div class="container">
-  <div class="row">
-    <label> id: {{ detailsNote.id }} </label>
-  </div>
-  <div class="row">
-    <label> Edit Title:</label>
-    <input
-      type="text"
-      [(ngModel)]="detailsNote.name"
-      class="form-control"
-    />
-  </div>
-  <div class="row">
-    <label> Edit Desciption:</label>
-    <input
-      type="text"
-      [(ngModel)]="detailsNote.description"
-      class="form-control"
-    />
-  </div>
-  <div class="row">
-    <label> is it Done? </label>
-    <input
-      type="checkbox"
-      (change)="onCheckboxChange()"
-      [(ngModel)]="detailsNote.isChecked"
-    />
-    {{ detailsNote.isChecked }}
-  </div>
-  <div class="row">
-    <button class="btn btn-primary" (click)="onUpdate()">
-      Update
-    </button>
-  </div>
+<div class="row">
+  <label> id: {{ detailsNote.id }} </label>
+</div>
+<div class="row">
+  <label> Edit Title:</label>
+  <input
+    type="text"
+    [(ngModel)]="detailsNote.name"
+    class="form-control"
+  />
+</div>
+<div class="row">
+  <label> Edit Desciption:</label>
+  <input
+    type="text"
+    [(ngModel)]="detailsNote.description"
+    class="form-control"
+  />
+</div>
+<div class="row">
+  <label> is it Done? </label>
+  <input
+    type="checkbox"
+    (change)="onCheckboxChange()"
+    [(ngModel)]="detailsNote.isChecked"
+  />
+  {{ detailsNote.isChecked }}
+</div>
+<div class="row">
+  <button class="btn btn-primary" (click)="onUpdate()">
+    Update
+  </button>
 </div>

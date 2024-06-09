@@ -1,12 +1,28 @@
-<div class="col-6">
+<div>
   <hr />
-  Note: {{ inNote?.id }} | {{ inNote?.description }} |
-  {{ inNote?.name }} | {{ checked }}
-
-  <button class="btn btn-primary" (click)="onEdit()">
-    Edit
-  </button>
-  <button class="btn btn-primary" (click)="onDelete()">
-    Delete
-  </button>
+  <div
+    class="row"
+    [ngClass]="{
+      'green-bg': inNote?.isChecked!,
+      'red-bg': !inNote?.isChecked
+    }"
+  >
+    <div class="col-4 text-center col-md-4 col-lg-4">
+      NoteId: {{ inNote?.id }}
+    </div>
+    <div class="col-4 text-center col-md-4 col-lg-4">
+      Title: {{ inNote?.name }}
+    </div>
+    <div class="col-4 text-center col-md-4 col-lg-4">
+      Description:{{ inNote?.description }}
+    </div>
+  </div>
+  <div class="row text-right">
+    <button class="btn btn-primary" (click)="onEdit()">
+      Edit
+    </button>
+    <button class="btn btn-primary" (click)="onDelete()">
+      Delete
+    </button>
+  </div>
 </div>
